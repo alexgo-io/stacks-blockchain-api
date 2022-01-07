@@ -4778,6 +4778,9 @@ export class PgDataStore
     if (this.eventReplay && skipDuringEventReplay) {
       return;
     }
+    if (process.env.SKIP_REFRESH_MATERIALIZED_VIEW === 'true') {
+      return;
+    }
     await client.query(`REFRESH MATERIALIZED VIEW ${viewName}`);
   }
   async getSmartContractByTrait(args: {
