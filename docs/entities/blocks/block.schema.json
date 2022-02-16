@@ -37,6 +37,14 @@
       "type": "string",
       "description": "Hash representing the block"
     },
+    "index_block_hash": {
+      "type": "string",
+      "description": "Hash of the index block"
+    },
+    "parent_index_block_hash": {
+      "type": "string",
+      "description": "Hash of the parent index block"
+    },
     "parent_block_hash": {
       "type": "string",
       "description": "Hash of the parent block"

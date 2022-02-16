@@ -1534,6 +1534,8 @@ export class PgDataStore
           parent_index_block_hash, block_height, parent_block_height, parent_block_hash, index_block_hash, block_hash,
           parent_burn_block_height, parent_burn_block_hash, parent_burn_block_time
         ) values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+          ON CONFLICT ON CONSTRAINT unique_microblock_hash
+          DO NOTHING
         `,
         [
           mb.canonical,
@@ -5022,6 +5024,9 @@ export class PgDataStore
     skipDuringEventReplay = true
   ) {
     if (this.eventReplay && skipDuringEventReplay) {
+      return;
+    }
+    if (process.env.SKIP_REFRESH_MATERIALIZED_VIEW === 'true') {
       return;
     }
     await client.query(`REFRESH MATERIALIZED VIEW ${viewName}`);

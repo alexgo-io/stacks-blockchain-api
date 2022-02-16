@@ -695,7 +695,8 @@ function createMessageProcessorQueue(): EventMessageHandler {
         .add(() => handleMicroblockMessage(chainId, msg, db))
         .catch(e => {
           logError(`Error processing core node microblock message`, e, msg);
-          throw e;
+          // don't throw error here, as we don't want to return error to client in case of a bad microblock
+          // throw e;
         });
     },
     handleBurnBlock: (msg: CoreNodeBurnBlockMessage, db: DataStore) => {

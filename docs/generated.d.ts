@@ -1220,6 +1220,14 @@ export interface Block {
    */
   hash: string;
   /**
+   * Hash of the index block
+   */
+  index_block_hash?: string;
+  /**
+   * Hash of the parent index block
+   */
+  parent_index_block_hash?: string;
+  /**
    * Hash of the parent block
    */
   parent_block_hash: string;
